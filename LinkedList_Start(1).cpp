@@ -1,19 +1,8 @@
-//This program contains all of the methods from Programming Challenges 1 through 10.
-//However, some of the code is incomplete.  Follow the indicated steps in order to 
-//build a complete program that utilizes a LinkedList.
 
 #include <iostream>
 using namespace std;
 
-//STEP ONE: Create a class called ListNode.
-//It's private members should be the following variables:
-// 1. value, a double
-// 2. next, a ListNode pointer
-// 3. make the LinkedList class below a friend
-//The only public member should be a constructor.
-//The constructor should take v (a double) and p (a ListNode pointer) as inputs.
-//The constructor should assign the value and next private members to the 
-//corresponding inputs
+
 class ListNode 
 {
   private: 
@@ -52,12 +41,7 @@ private:
                                    // Insert item into a sorted list  
 };
 
-//****************************************************************
-//                     LinkedList::sort                          *
-// The function sorts by successively removing the head of the   *
-// remaining list and inserting the item into a sorted list.     *
-// The sorted list starts out empty.                             *
-//****************************************************************
+
 void LinkedList::sort()
 {
   ListNode *sortedList = NULL;
@@ -66,10 +50,7 @@ void LinkedList::sort()
   // And insert them into sorted list  
   while (head != NULL)
   {
-	//STEP TWO: Create a ListNode pointer object called "item"
-	//and assign it to this class's "head" member.
-	//Then, assign head to the next node.
-	//See page 1139, lines 50-52 for an example.
+	
   ListNode *item = head; 
   head = head->next; 
 
@@ -78,11 +59,7 @@ void LinkedList::sort()
   head = sortedList;  
 }
 
-//***********************************************
-//           insert(item, sortedList)           *
-// Inserts the node item into an a sorted       *
-// list and returns the resulting sorted list.  *
-//***********************************************
+
 ListNode *LinkedList::insert(ListNode *item , ListNode *sortedList)
 {
   // If sortedList is empty or first member of the  sorted list
@@ -91,10 +68,7 @@ ListNode *LinkedList::insert(ListNode *item , ListNode *sortedList)
 
   if (sortedList == NULL || sortedList->value >= item->value)
    {
-	  //STEP THREE place sortedList after the ListNode item
-	  //by calling ->next.  See the top of page 1140 for an example.
-	  //NOTE that the example in the text is just adding a new node.
-	  //Your adding the entire sorted list after the current item.
+	  
      
       item->next = sortedList; // Place sortedList after item
       return item;            // Return the new head of the list
@@ -110,10 +84,7 @@ ListNode *LinkedList::insert(ListNode *item , ListNode *sortedList)
   return sortedList;  
 }
 
-//**********************************************************
-//           LinkedList::removeByPos                       *
-// Removes and deletes the list node at a given position.  *
-//**********************************************************
+
 void LinkedList::removeByPos(int pos)
 {
   // pos is number of nodes to skip   
@@ -147,18 +118,13 @@ void LinkedList::removeByPos(int pos)
     }
 }
 
-//**********************************************************
-//              LinkedList::insert                         *
-//  Insert a given value at a specified position.          *
-//**********************************************************
+
 void LinkedList::insert(double x, int pos)
 {
     // Cases where the new value goes at the beginning
     // or when the list is empty are handled separately
     if (pos == 0 || head == NULL) 
     {
-		//STEP FOUR: set head to a new ListNode.  Use x as the value
-		//and head as the ListNode to pass into the constructor.
      head = new ListNode(x, head);
 
         return;
@@ -184,12 +150,7 @@ void LinkedList::insert(double x, int pos)
     }
 }
 
-//*************************************************************
-//               LinkedList::search                           *      
-// Searches the linked list for a given value and returns     *
-// its position in the list if found. Otherwise, it           *
-// returns -1.                                                *
-//*************************************************************
+
 int LinkedList::search(double x)
 {
   int position = 0;
@@ -203,10 +164,7 @@ int LinkedList::search(double x)
   return -1;            // Not found
 }
 
-//********************************************************************
-//                     LinkedList::reverse                           *
-// Rearranges the elements of the list to put them in reverse order. *
-//********************************************************************
+
 void LinkedList::reverse()
 {
   ListNode *rev = NULL; // Holds list being reversed
@@ -216,11 +174,7 @@ void LinkedList::reverse()
   while (p)
   {
     // Move node at p to the beginning of the new list rev being constructed
-	//STEP 6a: This is to make some swaps.
-	//Assign mover to p (which is the current head value)
-	//Then assign p to the next node (use ->next)
-	//Then assign mover's next node to rev (which is currently NULL)
-	//Finally, assign rev to mover.
+	
     mover = p; 
     p = p->next; 
     mover->next = rev; 
@@ -231,9 +185,7 @@ void LinkedList::reverse()
   head = rev;
 }
 
-//***********************************
-//        Destructor                *
-//***********************************
+
 LinkedList::~LinkedList( )
 {
    ListNode *p = head;
@@ -246,10 +198,7 @@ LinkedList::~LinkedList( )
    }
 }
 
-//************************************************************
-//              LinkedList::remove                           *
-// Removes a value passes as parameter from the linked list. *
-//************************************************************
+
 void LinkedList::remove(double x)
 {
     ListNode *garbage;             // Use to delete nodes
@@ -258,8 +207,7 @@ void LinkedList::remove(double x)
     // Is x in the head?
     if (head->value == x)
     {
-		//STEP SEVEN: Assign garbage to the head node.
-		//Then point head to its next node with ->next
+		
 
     garbage = head;
     head = head->next; 
@@ -278,19 +226,14 @@ void LinkedList::remove(double x)
     if (p->next == NULL) return;    // Did not find it
     else
       {
-        //STEP EIGHT: Assign garbage to p's next node.
-		//Assign p's next node to garbage's next node.
-		//Then delete garbage.
+       
     garbage = p->next;
     p->next = garbage->next;
     delete garbage;
       }
 }
 
-//******************************************************
-//            Recursive print function                 *
-//  Prints all elements on a list passed as parameter. *
-//******************************************************
+
 void LinkedList::rPrint(ListNode *pList)
 {
   if (pList == NULL) return;
@@ -301,10 +244,7 @@ void LinkedList::rPrint(ListNode *pList)
    }
 }
 
-//***********************************
-//     LinkedList::print            *
-// Prints all elements on the list. *
-//***********************************
+
 void LinkedList::print()
 {
     ListNode *p = head;             // Use to walk down list
@@ -315,19 +255,13 @@ void LinkedList::print()
     }
 }
 
-//**********************************
-//     LinkedList::add             *
-// Adds a given value to the list. *
-//**********************************
+
 void LinkedList::add(double x)
 {
     head = new ListNode(x, head);
 }
 
-//***********************************************************
-//            LinkedList::isMember                          *
-// Checks to see if a given value is a member of the list.  *
-//***********************************************************
+
 bool LinkedList::isMember(double x)
 {
     ListNode *p = head;              // Use p to walk through list
